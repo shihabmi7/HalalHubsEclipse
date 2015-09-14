@@ -23,8 +23,13 @@ public class ApplicationData {
 	public static String GoogleMapKey = "AIzaSyCN_tzqvvH2YMCVVj3C96vKIVJjysh9CNs";
 
 	public static String BASE_URL = "http://45.55.196.7:1337";
-	public final static String SHOW_ALL_RESTAURENT = "http://45.55.196.7:1337/rest/restaurant/all/with/profile,category,tags";
+	public final static String SHOW_ALL_RESTAURENT = "http://45.55.196.7:1337/rest/searchRestaurant";
 	public final static String SHOW_RESTAURENT_MENU = "http://45.55.196.7:1337/rest/restaurantMenu/all/with/menuItems";
+
+	// Restaurent FoodMenu
+
+	// http://45.55.196.7:1337/rest/restaurantMenu/all/with/menuItems
+	// http://45.55.196.7:1337/rest/foodItem/get/2
 
 	public static ImageLoader ImageLoaderGetInstance() {
 

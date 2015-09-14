@@ -76,10 +76,10 @@ public class RestaurentListAdapter extends BaseAdapter {
 
 			holder = new ViewHolder();
 
-			holder.masjid_name = (TextView) convertView
+			holder.res_name = (TextView) convertView
 					.findViewById(R.id.restaurent_name);
 
-			holder.masjid_area = (TextView) convertView
+			holder.res_area = (TextView) convertView
 					.findViewById(R.id.textView_restaurent_address);
 
 			holder.catagory_image = (ImageView) convertView
@@ -98,11 +98,13 @@ public class RestaurentListAdapter extends BaseAdapter {
 
 		Restaurent aMasjidObj = (Restaurent) ApplicationData.restaurentList
 				.get(position);
-		holder.masjid_name.setText(aMasjidObj.getRestaurentName());
-		holder.masjid_area.setText(aMasjidObj.getAddress());
+		holder.res_name.setText(aMasjidObj.getRestaurentName());
+		holder.res_area.setText(aMasjidObj.getAddress());
+		
+		// just of 
 
-		imageLoader.displayImage(ApplicationData.restaurentList.get(position)
-				.getImage_Url(), holder.catagory_image, options);
+//		imageLoader.displayImage(ApplicationData.restaurentList.get(position)
+//				.getImage_Url(), holder.catagory_image, options);
 
 		if (holder.catagory_image != null) {
 
@@ -115,8 +117,8 @@ public class RestaurentListAdapter extends BaseAdapter {
 	class ViewHolder {
 
 		private int catatory_id;
-		private TextView masjid_name;
-		private TextView masjid_area;
+		private TextView res_name;
+		private TextView res_area;
 		private ImageView catagory_image;
 		RatingBar ratingBar_restaurent;
 

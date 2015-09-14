@@ -6,6 +6,7 @@ import java.util.ArrayList;
 @SuppressWarnings("serial")
 public class Restaurent implements Serializable {
 
+	private String restaurentID;
 	private String restaurentName;
 	private String Lat;
 	private String Long;
@@ -238,6 +239,21 @@ public class Restaurent implements Serializable {
 	 */
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	/**
+	 * @return the restaurentID
+	 */
+	public String getRestaurentID() {
+		return restaurentID;
+	}
+
+	/**
+	 * @param restaurentID
+	 *            the restaurentID to set
+	 */
+	public void setRestaurentID(String restaurentID) {
+		this.restaurentID = restaurentID;
 	}
 
 }

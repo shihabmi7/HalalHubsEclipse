@@ -24,6 +24,9 @@ abstract class BaseTask extends AsyncTask<Void, String, Boolean> {
 
 	// Dialog customDialog;
 	private ProgressDialog progress;
+	
+	abstract boolean task();
+	abstract boolean taskOnComplete();
 
 	public BaseTask(Context ctx, boolean displayProgress) {
 		this.ctx = ctx;
@@ -103,9 +106,7 @@ abstract class BaseTask extends AsyncTask<Void, String, Boolean> {
 		// pd.setMessage(args[0]);
 	}
 
-	abstract boolean task();
 
-	abstract boolean taskOnComplete();
 
 	public void setListener(CustomListener cust) {
 		listener = cust;

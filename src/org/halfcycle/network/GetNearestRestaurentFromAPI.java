@@ -1,5 +1,7 @@
 package org.halfcycle.network;
 
+import java.util.HashMap;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,25 +20,29 @@ public class GetNearestRestaurentFromAPI extends BaseTask {
 	public String Message = "";
 	public boolean Status = false;
 
-	public String TAGS = "tags";
+	public String TAGS = "data";
 	public String PROFILE = "profile";
 	public String NAME = "name";
+	public String ID = "id";
 	public String EMAIL = "email";
 	public String ADDRESS = "address";
 	public String POSTCODE = "postalCode";
 	public String FOOD_TYPE_TAG = "tag";
 	public String FOOD_LOGO_IMAGE = "logoImage";
 	public String STATUS = "status";
-	public String OPENING_TIME = "openingTime";
-	public String CLOSING_TIME = "closingTime";
+	public String OPENING_TIME = "opening_time";
+	public String CLOSING_TIME = "closing_time";
 
-	// "openingTime": "1970-01-01T04:00:00.000Z",
-	// "closingTime": "1970-01-01T16:00:00.000Z",
-	// "deliveryStartTime": "1970-01-01T05:00:00.000Z",
-	// "deliveryEndTime"
-
-	// logoImage
-
+	/*
+	 * "id": 3, "name": "Wow Burger", "address":
+	 * "House 12, Road 18, Sector 3, Dhaka, 1230", "postalCode": "1230",
+	 * "email": "sds@asda.fdgdf", "category": 2, "status": "active", "profile":
+	 * 3, "geo_location": "", "opening_time": "1970-01-01T04:00:00.000Z",
+	 * "closing_time": "1970-01-01T16:00:00.000Z", "delivery_start_time":
+	 * "1970-01-01T05:00:00.000Z", "delivery_end_time":
+	 * "1970-01-01T15:00:00.000Z", "creation_date": "2015-08-23T13:04:16.000Z",
+	 * "update_date": "2015-08-23T13:09:36.000Z"
+	 */
 	public GetNearestRestaurentFromAPI(Context ctx, boolean displayProgress) {
 
 		super(ctx, displayProgress);
@@ -48,8 +54,14 @@ public class GetNearestRestaurentFromAPI extends BaseTask {
 
 		try {
 
-			HttpRequest request = HttpRequest
-					.get(ApplicationData.SHOW_ALL_RESTAURENT);
+			HashMap<String, String> params = new HashMap<String, String>();
+
+			params.put(new String("postalCode"), "1230");
+			params.put(new String("tag"), "");
+
+			HttpRequest request = HttpRequest.post(
+					ApplicationData.SHOW_ALL_RESTAURENT, params, true);
+
 			jsonData = request.body();
 
 			// System.out.println(jsonData);
@@ -71,15 +83,18 @@ public class GetNearestRestaurentFromAPI extends BaseTask {
 
 		try {
 
-			// JSONObject jObject = new JSONObject(jsonData);
+			JSONObject jObject = new JSONObject(jsonData);
 
-			JSONArray jsonArray = new JSONArray(jsonData);
+			// JSONArray jsonArray = new JSONArray(jsonData);
+
+			JSONArray jsonArray = jObject.getJSONArray(TAGS);
 
 			for (int i = 0; i < jsonArray.length(); i++) {
 
 				JSONObject jobj2 = jsonArray.getJSONObject(i);
 
 				Restaurent resObj = new Restaurent();
+				resObj.setRestaurentID(jobj2.getString(ID));
 				resObj.setRestaurentName(jobj2.getString(NAME));
 				resObj.setAddress(jobj2.getString(ADDRESS));
 				resObj.setEmail(jobj2.getString(EMAIL));
@@ -89,39 +104,36 @@ public class GetNearestRestaurentFromAPI extends BaseTask {
 
 				Log.e("Nearest Res", "Res: >> " + resObj.getRestaurentName());
 
-				if (jobj2.has(TAGS)) {
-
-					JSONArray array = jobj2.getJSONArray(TAGS);
-
-					for (int j = 0; j < array.length(); j++) {
-
-						JSONObject jObj3 = array.getJSONObject(j);
-
-						String tag = jObj3.getString(FOOD_TYPE_TAG);
-
-						Log.e(" fOOD tag >> ", tag);
-
-						// photo_reference = jObj3.getString("photo_reference");
-						// resObj.setImage_Url(PHOTO_URL_FIRST_PART
-						// + photo_reference + "&" + key);
-					}
-				}
-				if (jobj2.has(PROFILE)) {
-
-					// JSONArray array = jobj2.getJSONArray(PROFILE);
-					//
-					JSONObject jObj3 = jobj2.getJSONObject(PROFILE);
-					String image_url = jObj3.getString(FOOD_LOGO_IMAGE);
-					resObj.setImage_Url(ApplicationData.BASE_URL + image_url);
-
-					Log.e(" Res Image >> ", image_url);
-
-				}
 				/*
-				 * else {
+				 * if (jobj2.has(TAGS)) {
 				 * 
-				 * resObj.setImage_Url(jobj2.getString("icon")); }
-				 */
+				 * JSONArray array = jobj2.getJSONArray(TAGS);
+				 * 
+				 * for (int j = 0; j < array.length(); j++) {
+				 * 
+				 * JSONObject jObj3 = array.getJSONObject(j);
+				 * 
+				 * String tag = jObj3.getString(FOOD_TYPE_TAG);
+				 * 
+				 * Log.e(" fOOD tag >> ", tag);
+				 * 
+				 * // photo_reference = jObj3.getString("photo_reference"); //
+				 * resObj.setImage_Url(PHOTO_URL_FIRST_PART // + photo_reference
+				 * + "&" + key); } } if (jobj2.has(PROFILE)) {
+				 * 
+				 * // JSONArray array = jobj2.getJSONArray(PROFILE); //
+				 * JSONObject jObj3 = jobj2.getJSONObject(PROFILE); String
+				 * image_url = jObj3.getString(FOOD_LOGO_IMAGE);
+				 * resObj.setImage_Url(ApplicationData.BASE_URL + image_url);
+				 * 
+				 * Log.e(" Res Image >> ", image_url);
+				 * 
+				 * }
+				 *//*
+					 * else {
+					 * 
+					 * resObj.setImage_Url(jobj2.getString("icon")); }
+					 */
 
 				ApplicationData.restaurentList.add(resObj);
 
