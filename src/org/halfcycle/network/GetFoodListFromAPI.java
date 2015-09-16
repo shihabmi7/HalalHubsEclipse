@@ -18,8 +18,10 @@ public class GetFoodListFromAPI extends BaseTask {
 	public String Message = "";
 	public boolean Status = false;
 
+	private final String FOOD_ITEM = "foodItem";
 	public String TAGS_MENU_LIST = "menuItems";
 	public String PROFILE = "profile";
+	public String FOOD_TYPE_NAME = "name";
 	public String NAME = "name";
 	public String EMAIL = "email";
 	public String ADDRESS = "address";
@@ -52,8 +54,6 @@ public class GetFoodListFromAPI extends BaseTask {
 					.get(ApplicationData.SHOW_RESTAURENT_MENU);
 			jsonData = request.body();
 
-			// System.out.println(jsonData);
-
 			Log.e("Food RESPONSE", jsonData);
 
 		} catch (Exception e) {
@@ -80,9 +80,12 @@ public class GetFoodListFromAPI extends BaseTask {
 				// Restaurent resObj = new Restaurent();
 				// resObj.setRestaurentName(jobj2.getString(NAME));
 
-				Food food = new Food();
+				Food food = new Food(Food.FOOD_SECTION);
+				food.setFoodTypeName(jobj2.getString(FOOD_TYPE_NAME));
 
-				Log.e("Food ", "Food: >> " + food.getFoodName());
+				Log.e("Food ", "Food Type : >> " + food.getFoodTypeName());
+
+				ApplicationData.foodList.add(food);
 
 				if (jobj2.has(TAGS_MENU_LIST)) {
 
@@ -90,17 +93,19 @@ public class GetFoodListFromAPI extends BaseTask {
 
 					for (int j = 0; j < array.length(); j++) {
 
-						JSONObject jObj3 = array.getJSONObject(j);
-						String name = jObj3.getString(NAME);
-						food.setFoodName(name);
+						Food aFood = new Food(Food.FOOD_ITEM);
 
-						Log.e(" fOOD tag >> ", name);
+						JSONObject jObj3 = array.getJSONObject(j);
+
+						aFood.setFoodName(jObj3.getString(NAME));
+						aFood.setFoodIDNo(jObj3.getString(FOOD_ITEM));
+
+						Log.e("Food ", "Food Name: >> " + aFood.getFoodName());
+
+						ApplicationData.foodList.add(aFood);
 
 					}
 				}
-				
-
-				ApplicationData.foodList.add(food);
 
 			}
 

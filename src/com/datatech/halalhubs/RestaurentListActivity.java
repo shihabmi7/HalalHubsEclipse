@@ -6,6 +6,8 @@ import org.halfcycle.network.CustomListener;
 import org.halfcycle.network.GetNearestRestaurentFromAPI;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.ListView;
 import com.applogic.model.Masjid;
 import com.applogic.model.Restaurent;
 import com.applogic.utility.ApplicationData;
+import com.applogic.utility.InternetConnection;
 import com.datatech.halalhubstest.R;
 
 public class RestaurentListActivity extends Activity {
@@ -56,47 +59,14 @@ public class RestaurentListActivity extends Activity {
 				}
 			});
 
-			GetNearestRestaurentFromAPI api = new GetNearestRestaurentFromAPI(
-					activity, true);
+			if (InternetConnection.isAvailable(activity)) {
 
-			api.setListener(new CustomListener() {
+				getRestaurentListFromAPI();
 
-				@Override
-				public void ModificationMade() {
+			} else {
 
-					resList = ApplicationData.restaurentList;
-
-					resAdapter = new RestaurentListAdapter(
-							getApplicationContext(), resList);
-
-					list_view.setAdapter(resAdapter);
-
-				}
-			});
-
-			api.execute();
-
-			//
-
-			// GetNearestMasjidFromAPI api = new
-			// GetNearestMasjidFromAPI(activity,
-			// true);
-			//
-			// api.setListener(new CustomListener() {
-			//
-			// @Override
-			// public void ModificationMade() {
-			//
-			// masjids = ApplicationData.masjidList;
-			// adapter = new MasjidListAdapter(getApplicationContext(),
-			// masjids);
-			//
-			// list_view.setAdapter(adapter);
-			//
-			// }
-			// });
-			//
-			// api.execute();
+				showAlert(activity);
+			}
 
 		} catch (Exception e) {
 
@@ -104,4 +74,70 @@ public class RestaurentListActivity extends Activity {
 		}
 
 	}
+
+	public void getRestaurentListFromAPI() {
+
+		GetNearestRestaurentFromAPI api = new GetNearestRestaurentFromAPI(
+				activity, true);
+
+		api.setListener(new CustomListener() {
+
+			@Override
+			public void ModificationMade() {
+
+				resList = ApplicationData.restaurentList;
+
+				resAdapter = new RestaurentListAdapter(getApplicationContext(),
+						resList);
+
+				list_view.setAdapter(resAdapter);
+
+			}
+		});
+
+		api.execute();
+	}
+
+	public void showAlert(final Activity activity) {
+
+		if (InternetConnection.isAvailable(activity)) {
+			
+			getRestaurentListFromAPI();
+
+		} else {
+
+			new AlertDialog.Builder(activity)
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setTitle("No Internet Connection")
+					.setMessage("Please check your connectivity.")
+					.setPositiveButton("Exit",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+
+									InternetConnection
+											.ExitApplication(activity);
+
+								}
+
+							})
+					.setNegativeButton("Retry",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+
+									// Stop the activity
+									showAlert(activity);
+
+								}
+
+							}).show();
+		}
+
+	}
+
 }

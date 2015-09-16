@@ -12,19 +12,28 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.applogic.model.Food;
-import com.applogic.utility.ApplicationData;
+import com.datatech.halalhubs.PinnedSectionListView.PinnedSectionListAdapter;
 import com.datatech.halalhubstest.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
-public class FoodListAdapter extends BaseAdapter {
+public class FoodListAdapter extends BaseAdapter implements
+		PinnedSectionListAdapter {
 
 	private final Context mContext;
 	ArrayList<Food> foodList;
 	DisplayImageOptions options;
 	ImageLoader imageLoader = ImageLoader.getInstance();
+
+	// View Type for Separators
+	private static final int ITEM_VIEW_TYPE_SEPARATOR = 0;
+	// View Type for Regular rows
+	private static final int ITEM_VIEW_TYPE_REGULAR = 1;
+	// Types of Views that need to be handled
+	// -- Separators and Regular rows --
+	private static final int ITEM_VIEW_TYPE_COUNT = 2;
 
 	// we use universal image loader library
 
@@ -48,16 +57,18 @@ public class FoodListAdapter extends BaseAdapter {
 		// =====================================================
 	}
 
-	@Override
+	/*
+	 * DONE
+	 */@Override
 	public int getCount() {
 		// return 100;
-		return ApplicationData.foodList.size();
+		return foodList.size();
 
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return ApplicationData.foodList.get(position);
+		return null;
 	}
 
 	@Override
@@ -66,27 +77,74 @@ public class FoodListAdapter extends BaseAdapter {
 	}
 
 	@Override
+	public boolean isEnabled(int position) {
+
+		return getItemViewType(position) != ITEM_VIEW_TYPE_SEPARATOR;
+	}
+
+	@Override
+	public int getViewTypeCount() {
+		return ITEM_VIEW_TYPE_COUNT;
+	}
+
+	@Override
+	public int getItemViewType(int position) {
+
+		return foodList.get(position).getFoodType();
+	}
+
+	/*
+	 * 
+	 * Responsible for Pinned ListView
+	 */
+	@Override
+	public boolean isItemViewTypePinned(int viewType) {
+		// TODO Auto-generated method stub
+		return viewType == Food.FOOD_SECTION;
+	}
+
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 
-		if (convertView == null) {
+		Food aFood = foodList.get(position);
 
-			convertView = LayoutInflater.from(mContext).inflate(
-					R.layout.listview_item_a_food, parent, false);
+		if (convertView == null) {
 
 			holder = new ViewHolder();
 
-			holder.food_name = (TextView) convertView
-					.findViewById(R.id.food_name);
+			switch (aFood.getFoodType()) {
 
-			holder.food_description = (TextView) convertView
-					.findViewById(R.id.food_description);
+			case Food.FOOD_SECTION:
 
-			holder.food_image = (ImageView) convertView
-					.findViewById(R.id.imageView_food_pic);
+				convertView = LayoutInflater.from(mContext).inflate(
+						R.layout.item_food_header, parent, false);
 
-//			holder.ratingBar_restaurent = (RatingBar) convertView
-//					.findViewById(R.id.ratingBar_restaurent);
+				holder.food_section_header = (TextView) convertView
+						.findViewById(R.id.header);
+
+				break;
+
+			case Food.FOOD_ITEM:
+
+				convertView = LayoutInflater.from(mContext).inflate(
+						R.layout.listview_item_a_food, parent, false);
+
+				holder.food_name = (TextView) convertView
+						.findViewById(R.id.food_name);
+
+				holder.food_description = (TextView) convertView
+						.findViewById(R.id.food_description);
+
+				holder.food_image = (ImageView) convertView
+						.findViewById(R.id.imageView_food_pic);
+
+				break;
+
+			}
+
+			// holder.ratingBar_restaurent = (RatingBar) convertView
+			// .findViewById(R.id.ratingBar_restaurent);
 
 			convertView.setTag(holder);
 
@@ -96,22 +154,36 @@ public class FoodListAdapter extends BaseAdapter {
 
 		}
 
-		Food aFood = (Food) ApplicationData.foodList.get(position);
+		switch (aFood.getFoodType()) {
 
-		holder.food_name.setText(aFood.getFoodName());
-		holder.food_description.setText(aFood.getFoodDescription());
+		case Food.FOOD_SECTION:
 
-//		holder.ratingBar_restaurent.setStepSize((float) 0.25);
-//		holder.ratingBar_restaurent.setRating(4);
+			holder.food_section_header.setText(aFood.getFoodTypeName());
 
-		imageLoader.displayImage(aFood.getFoodPictureUrl(), holder.food_image,
-				options);
+			break;
 
-		if (holder.food_image != null) {
+		case Food.FOOD_ITEM:
 
-			// mahbub vi code
+			holder.food_name.setText(aFood.getFoodName());
+
+			break;
 
 		}
+
+		// holder.food_description.setText(aFood.getFoodDescription());
+
+		// holder.ratingBar_restaurent.setStepSize((float) 0.25);
+		// holder.ratingBar_restaurent.setRating(4);
+
+		// imageLoader.displayImage(aFood.getFoodPictureUrl(),
+		// holder.food_image,
+		// options);
+		//
+		// if (holder.food_image != null) {
+		//
+		// // mahbub vi code
+		//
+		// }
 		return convertView;
 	}
 
@@ -119,6 +191,7 @@ public class FoodListAdapter extends BaseAdapter {
 
 		private int catatory_id;
 		private TextView food_name;
+		private TextView food_section_header;
 		private TextView food_description;
 		private ImageView food_image;
 		RatingBar ratingBar_restaurent;
