@@ -1,8 +1,10 @@
 package com.applogic.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+@SuppressWarnings("serial")
 
-public class Food {
+public class Food implements Serializable{
 
 	private String foodName;
 	private String foodPrice;

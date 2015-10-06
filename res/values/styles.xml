@@ -1,5 +1,14 @@
 <resources>
 
+    <style name="Theme.MyAppTheme" parent="@style/Theme.AppCompat">
+        <item name="actionBarStyle">@style/ActionBar.Solid.MyAppTheme</item>
+        <item name="icon">@drawable/ic_launcher</item>
+    </style>
+
+    <style name="ActionBar.Solid.MyAppTheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="background">@color/white</item>
+    </style>
+
     <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@null</item>

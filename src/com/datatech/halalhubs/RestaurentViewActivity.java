@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,8 +22,6 @@ import com.applogic.model.Restaurent;
 import com.applogic.utility.ApplicationData;
 import com.datatech.halalhubstest.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
@@ -121,12 +118,15 @@ public class RestaurentViewActivity extends Activity {
 						@Override
 						public void onLoadingComplete(String imageUri,
 								View view, Bitmap loadedImage) {
+							
+							
 							// Do whatever you want with Bitmap
-
 							Log.e("loadImage", "onLoadingComplete ");
-							relative_restaurent_info
-									.setBackground(new BitmapDrawable(
-											loadedImage));
+							
+							// TODO UPDATE CODE HERE SHIHAB
+//							relative_restaurent_info
+//									.setBackground(new BitmapDrawable(
+//											loadedImage));
 						}
 					});
 

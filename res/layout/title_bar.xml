@@ -51,15 +51,36 @@
                 android:layout_margin="@dimen/common_margin"
                 android:background="@color/common_grey"
                 android:orientation="vertical" />
+            
+            <include layout="@layout/counter_menuitem_layout"></include>
 
-            <ImageView
-                android:id="@+id/menu_item_cart"
-                android:layout_width="@dimen/title_bar_iconsize"
-                android:layout_height="@dimen/title_bar_iconsize"
-                android:background="@drawable/title_bar_icon_selector"
-                android:clickable="true"
-                android:padding="@dimen/title_bar_icon_padding"
-                android:src="@drawable/ic_launcher" />
+<!--             <FrameLayout -->
+<!--                 android:id="@+id/counterPanel" -->
+<!--                 android:layout_width="48dp" -->
+<!--                 android:layout_height="48dp" -->
+<!--                 android:background="@drawable/icon_shopping" > -->
+
+<!--                 <RelativeLayout -->
+<!--                     android:id="@+id/counterValuePanel" -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" > -->
+
+<!--                     <ImageView -->
+<!--                         android:id="@+id/counterBackground" -->
+<!--                         android:layout_width="wrap_content" -->
+<!--                         android:layout_height="wrap_content" -->
+<!--                         android:background="@drawable/unread_background" /> -->
+
+<!--                     <TextView -->
+<!--                         android:id="@+id/count" -->
+<!--                         android:layout_width="wrap_content" -->
+<!--                         android:layout_height="wrap_content" -->
+<!--                         android:layout_centerInParent="true" -->
+<!--                         android:text="1" -->
+<!--                         android:textColor="#FFFFFF" -->
+<!--                         android:textSize="8sp" /> -->
+<!--                 </RelativeLayout> -->
+<!--             </FrameLayout> -->
         </LinearLayout>
 
         <TextView

@@ -17,7 +17,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/FullscreenTheme" >
+        android:theme="@style/Theme.MyAppTheme" >
         <activity
             android:name="com.datatech.halalhubs.RestaurentListActivity"
             android:label="@string/app_name" >
@@ -30,6 +30,10 @@
         <activity android:name="com.datatech.halalhubs.RestaurentViewActivity" >
         </activity>
         <activity android:name="com.datatech.halalhubs.RestaurentFoodListActivity" >
+        </activity>
+        <activity android:name="com.datatech.halalhubs.ShowFoodDetailsActivity" >
+        </activity>
+        <activity android:name="com.datatech.halalhubs.ShowShopingDetailsActivity" >
         </activity>
     </application>
 

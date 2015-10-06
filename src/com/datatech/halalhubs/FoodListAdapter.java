@@ -19,8 +19,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
-public class FoodListAdapter extends BaseAdapter implements
-		PinnedSectionListAdapter {
+public class FoodListAdapter extends BaseAdapter implements PinnedSectionListAdapter{
 
 	private final Context mContext;
 	ArrayList<Food> foodList;
@@ -67,8 +66,8 @@ public class FoodListAdapter extends BaseAdapter implements
 	}
 
 	@Override
-	public Object getItem(int position) {
-		return null;
+	public Food getItem(int position) {
+		return foodList.get(position);
 	}
 
 	@Override
@@ -107,7 +106,7 @@ public class FoodListAdapter extends BaseAdapter implements
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 
-		Food aFood = foodList.get(position);
+		final Food aFood = foodList.get(position);
 
 		if (convertView == null) {
 
@@ -153,6 +152,18 @@ public class FoodListAdapter extends BaseAdapter implements
 			holder = (ViewHolder) convertView.getTag();
 
 		}
+
+//		convertView.setClickable(true);
+//		convertView.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View arg0) {
+//
+//				Toast.makeText(mContext, "Food Item : " + aFood.getFoodName(),
+//						Toast.LENGTH_LONG).show();
+//
+//			}
+//		});
 
 		switch (aFood.getFoodType()) {
 

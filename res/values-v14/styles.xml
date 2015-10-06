@@ -1,0 +1,26 @@
+<resources>
+
+    <style name="Theme.MyAppTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.MyAppTheme</item>
+           <item name="icon">@drawable/ic_launcher</item>
+    </style>
+
+    <style name="ActionBar.Solid.MyAppTheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="android:background">@color/app_titile_bar_color</item>
+    </style>
+
+</resources>
+
+
+<!-- <resources> -->
+
+<!--      <style name="Theme.MyAppTheme" parent="@style/Theme.AppCompat"> -->
+<!--         <item name="actionBarStyle">@style/ActionBar.Solid.MyAppTheme</item> -->
+<!--         <item name="icon">@drawable/ic_launcher</item> -->
+<!--     </style> -->
+
+<!--     <style name="ActionBar.Solid.MyAppTheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid"> -->
+<!--         <item name="background">@color/white</item> -->
+<!--     </style> -->
+
+<!-- </resources> -->

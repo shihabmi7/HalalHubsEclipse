@@ -115,6 +115,7 @@ public class GetFoodListFromAPI extends BaseTask {
 
 		} catch (Exception e) {
 
+			e.printStackTrace();
 		}
 
 		return true;

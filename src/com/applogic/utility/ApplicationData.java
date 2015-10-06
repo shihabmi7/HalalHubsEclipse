@@ -18,13 +18,19 @@ public class ApplicationData {
 	public static ArrayList<Food> foodList = new ArrayList<Food>();
 	public static ArrayList<Masjid> masjidList = new ArrayList<Masjid>();
 
-	static ImageLoader imageLoader = ImageLoader.getInstance();
+	public static ImageLoader imageLoader = ImageLoader.getInstance();
 
 	public static String GoogleMapKey = "AIzaSyCN_tzqvvH2YMCVVj3C96vKIVJjysh9CNs";
+	
+	public static final int MAX_NO_QUANTITY = 20 ;
+	public static final int MIN_NO_QUANTITY = 1 ;
+	
+	public static final String CURRENCY = "BDT";
 
 	public static String BASE_URL = "http://45.55.196.7:1337";
 	public final static String SHOW_ALL_RESTAURENT = "http://45.55.196.7:1337/rest/searchRestaurant";
 	public final static String SHOW_RESTAURENT_MENU = "http://45.55.196.7:1337/rest/restaurantMenu/all/with/menuItems";
+	public final static String SHOW_FOOD_DETAILS = "http://45.55.196.7:1337/rest/foodItem/get/";
 
 	// Restaurent FoodMenu
 

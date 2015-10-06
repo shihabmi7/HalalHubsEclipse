@@ -1,75 +1,117 @@
 package com.datatech.halalhubs;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import org.halfcycle.network.CustomListener;
 import org.halfcycle.network.GetFoodListFromAPI;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
+import android.app.AlertDialog;
+import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SectionIndexer;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.applogic.model.Food;
 import com.applogic.utility.ApplicationData;
-import com.datatech.halalhubs.PinnedSectionListView.PinnedSectionListAdapter;
-import com.datatech.halalhubstest.R;
+import com.applogic.utility.InternetConnection;
 
-public class RestaurentFoodListActivity extends Activity {
+public class RestaurentFoodListActivity extends ListActivity {
 
 	RestaurentFoodListActivity activity = this;
 
-	// TODO GET THE LIST FROM HALAL HUBS
-	// TODO SET THE LSIT ITEM LAYOUT & ADAPTER
-	// TODO SHOW LIST , implements pinsec list adapter
+	// TODO GET THE LIST FROM HALAL HUBS: finished
+	// TODO SET THE LSIT ITEM LAYOUT & ADAPTER : finished
+	// TODO SHOW LIST , implements pin secion list adapter : finish
 
 	PinnedSectionListView list_view_foodList;
-	
-	//ListView list_view_foodList;
-
-	private FoodListAdapter resAdapter;
-
+	// ListView list_view_foodList;
+	private FoodListAdapter foodListAdapter;
 	ArrayList<Food> foodList = new ArrayList<Food>();
+
 	private boolean isFastScroll = false;
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_food_list);
+		// setContentView(R.layout.activity_food_list);
 
-		list_view_foodList = (PinnedSectionListView) findViewById(R.id.list_view_foodList);
-		//list_view_foodList = (ListView) findViewById(R.id.list_view_foodList);
+		// list_view_foodList = (PinnedSectionListView)
+		// findViewById(R.id.list_view_foodList);
+		// list_view_foodList = (ListView)
+		// findViewById(R.id.list_view_foodList);
+		// list_view_foodList.setClickable(true);
+
+		// getListView().setFastScrollEnabled(isFastScroll);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+
+			getListView().setFastScrollAlwaysVisible(true);
+
+		}
 
 		try {
 
-			list_view_foodList
-					.setOnItemClickListener(new OnItemClickListener() {
+			if (InternetConnection.isAvailable(activity)) {
 
-						@Override
-						public void onItemClick(AdapterView<?> arg0, View arg1,
-								int position, long arg3) {
+				getFoodListFromAPI();
 
-							// startActivity(new Intent(activity,
-							// RestaurentViewActivity.class).setFlags(
-							// Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(
-							// "position", position));
+			} else {
 
-						}
-					});
+				showAlert(activity);
 
-			getFoodListFromAPI();
+			}
+
+			// list_view_foodList
+			// .setOnItemClickListener(new OnItemClickListener() {
+			//
+			// @Override
+			// public void onItemClick(AdapterView<?> arg0, View arg1,
+			// int position, long arg3) {
+			//
+			// // TODO GO TO NEXT PAGE
+			// Food food = foodList.get(position);
+			//
+			//
+			// Toast.makeText(getApplicationContext(),
+			// "Food Item : " + food.getFoodTypeName(),
+			// Toast.LENGTH_LONG).show();
+			//
+			// if (food.getFoodType() == Food.FOOD_ITEM) {
+			// // do your want to do...
+			//
+			// Toast.makeText(getApplicationContext(),
+			// "Food Item : " + food.getFoodName(),
+			// Toast.LENGTH_LONG).show();
+			//
+			// // startActivity(new Intent(activity,
+			// // ShowFoodDetailsActivity.class)
+			// // .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+			// // .putExtra("position", position)
+			// // .putExtra("food", food));
+			//
+			// } else if (food.getFoodType() == Food.FOOD_SECTION) {
+			//
+			// // the Section is on click
+			//
+			// Toast.makeText(getApplicationContext(),
+			// "" + food.getFoodTypeName(),
+			// Toast.LENGTH_LONG).show();
+			//
+			// }
+			//
+			// }
+			// });
+
+		} catch (RuntimeException e) {
+
+			e.printStackTrace();
 
 		} catch (Exception e) {
 
@@ -77,8 +119,26 @@ public class RestaurentFoodListActivity extends Activity {
 		}
 
 	}
-	
+
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+
+		Food item = (Food) getListView().getAdapter().getItem(position);
+
+		if (item != null) {
+
+			Toast.makeText(this,
+					"Item " + position + ": " + item.getFoodName(),
+					Toast.LENGTH_SHORT).show();
+		} else {
+
+			Toast.makeText(this, "Item " + position, Toast.LENGTH_SHORT).show();
+
+		}
+	}
+
 	public void getFoodListFromAPI() {
+
 		GetFoodListFromAPI api = new GetFoodListFromAPI(activity, true);
 
 		api.setListener(new CustomListener() {
@@ -87,214 +147,58 @@ public class RestaurentFoodListActivity extends Activity {
 			public void ModificationMade() {
 
 				foodList = ApplicationData.foodList;
-
-				resAdapter = new FoodListAdapter(getApplicationContext(),
+				foodListAdapter = new FoodListAdapter(getApplicationContext(),
 						foodList);
 
-				list_view_foodList.setAdapter(resAdapter);
+				// list_view_foodList.setAdapter(foodListAdapter);
+				setListAdapter(foodListAdapter);
 
 			}
 		});
 
 		api.execute();
 	}
-	@SuppressLint("NewApi")
-	private void initializeAdapter() {
 
-		list_view_foodList.setFastScrollEnabled(isFastScroll);
-		if (isFastScroll) {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-				list_view_foodList.setFastScrollAlwaysVisible(true);
-			}
-			list_view_foodList.setAdapter(new FastScrollAdapter(this,
-					android.R.layout.simple_list_item_1, android.R.id.text1));
+	public void showAlert(final Activity activity) {
+
+		if (InternetConnection.isAvailable(activity)) {
+
+			getFoodListFromAPI();
+
 		} else {
-			
-			
-			list_view_foodList.setAdapter(new SimpleAdapter(this,
-					android.R.layout.simple_list_item_1, android.R.id.text1));
-		}
-	}
 
-	static class SimpleAdapter extends ArrayAdapter<Item> implements
-			PinnedSectionListAdapter, SectionIndexer {
+			new AlertDialog.Builder(activity)
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setTitle("No Internet Connection")
+					.setMessage("Please check your connectivity.")
+					.setPositiveButton("Exit",
+							new DialogInterface.OnClickListener() {
 
-		
-		private Item[] sections;
-		
-		private static final int[] COLORS = new int[] { R.color.green_light,
-				R.color.orange_light, R.color.blue_light, R.color.red_light };
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
 
-		public SimpleAdapter(Context context, int resource,
-				int textViewResourceId) {
-			super(context, resource, textViewResourceId);
-			generateDataset('A', 'Z', false);
-		}
+									InternetConnection
+											.ExitApplication(activity);
 
-		public void generateDataset(char from, char to, boolean clear) {
+								}
 
-			if (clear)
-				clear();
+							})
+					.setNegativeButton("Retry",
+							new DialogInterface.OnClickListener() {
 
-			final int sectionsNumber = to - from + 1;
-			prepareSections(sectionsNumber);
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
 
-			int sectionPosition = 0, listPosition = 0;
+									// Stop the activity
+									showAlert(activity);
 
-			for (char i = 0; i < sectionsNumber; i++) {
-				Item section = new Item(Item.SECTION,
-						String.valueOf((char) ('A' + i)));
-				section.sectionPosition = sectionPosition;
-				section.listPosition = listPosition++;
-				onSectionAdded(section, sectionPosition);
-				add(section);
+								}
 
-				final int itemsNumber = (int) Math.abs((Math.cos(2f * Math.PI
-						/ 3f * sectionsNumber / (i + 1f)) * 25f));
-				for (int j = 0; j < itemsNumber; j++) {
-					Item item = new Item(Item.ITEM,
-							section.text.toUpperCase(Locale.ENGLISH) + " - "
-									+ j);
-					item.sectionPosition = sectionPosition;
-					item.listPosition = listPosition++;
-					add(item);
-				}
-
-				sectionPosition++;
-			}
-		}
-
-//		@Override
-		protected void prepareSections(int sectionsNumber) {
-			sections = new Item[sectionsNumber];
-		}
-
-//		@Override
-		protected void onSectionAdded(Item section, int sectionPosition) {
-			sections[sectionPosition] = section;
-		}
-
-		@Override
-		public Item[] getSections() {
-			return sections;
-		}
-
-		@Override
-		public int getPositionForSection(int section) {
-			if (section >= sections.length) {
-				section = sections.length - 1;
-			}
-			return sections[section].listPosition;
-		}
-
-		@Override
-		public int getSectionForPosition(int position) {
-			if (position >= getCount()) {
-				position = getCount() - 1;
-			}
-			return getItem(position).sectionPosition;
-		}
-
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-
-			TextView view = (TextView) super.getView(position, convertView,
-					parent);
-			view.setTextColor(Color.DKGRAY);
-			view.setTag("" + position);
-			Item item = getItem(position);
-			if (item.type == Item.SECTION) {
-				// view.setOnClickListener(PinnedSectionListActivity.this);
-				view.setBackgroundColor(parent.getResources().getColor(
-						COLORS[item.sectionPosition % COLORS.length]));
-			}
-			return view;
-		}
-
-		@Override
-		public int getViewTypeCount() {
-			return 2;
-		}
-
-		@Override
-		public int getItemViewType(int position) {
-			return getItem(position).type;
-		}
-
-		@Override
-		public boolean isItemViewTypePinned(int viewType) {
-			return viewType == Item.SECTION;
+							}).show();
 		}
 
 	}
 
-	class FastScrollAdapter extends SimpleAdapter implements SectionIndexer {
-
-		private Item[] sections;
-
-		public FastScrollAdapter(Context context, int resource,
-				int textViewResourceId) {
-
-			super(context, resource, textViewResourceId);
-
-		}
-
-		@Override
-		protected void prepareSections(int sectionsNumber) {
-			sections = new Item[sectionsNumber];
-		}
-
-		@Override
-		protected void onSectionAdded(Item section, int sectionPosition) {
-			sections[sectionPosition] = section;
-		}
-
-		@Override
-		public Item[] getSections() {
-			return sections;
-		}
-
-		@Override
-		public int getPositionForSection(int section) {
-			if (section >= sections.length) {
-				section = sections.length - 1;
-			}
-			return sections[section].listPosition;
-		}
-
-		@Override
-		public int getSectionForPosition(int position) {
-			if (position >= getCount()) {
-				position = getCount() - 1;
-			}
-			return getItem(position).sectionPosition;
-		}
-
-	}
-
-	static class Item {
-
-		public static final int ITEM = 0;
-		public static final int SECTION = 1;
-
-		public final int type;
-		public final String text;
-
-		public int sectionPosition;
-		public int listPosition;
-
-		public Item(int type, String text) {
-			this.type = type;
-			this.text = text;
-		}
-
-		@Override
-		public String toString() {
-			return text;
-		}
-
-	}
-
-	
 }
