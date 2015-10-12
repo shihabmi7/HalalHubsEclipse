@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.applogic.model.Food;
 import com.applogic.model.Masjid;
+import com.applogic.model.Order;
 import com.applogic.model.PrayerTime;
 import com.applogic.model.Restaurent;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -17,14 +18,15 @@ public class ApplicationData {
 	public static ArrayList<Restaurent> restaurentList = new ArrayList<Restaurent>();
 	public static ArrayList<Food> foodList = new ArrayList<Food>();
 	public static ArrayList<Masjid> masjidList = new ArrayList<Masjid>();
+	public static ArrayList<Order> foodOrderList = new ArrayList<Order>();
 
 	public static ImageLoader imageLoader = ImageLoader.getInstance();
 
 	public static String GoogleMapKey = "AIzaSyCN_tzqvvH2YMCVVj3C96vKIVJjysh9CNs";
-	
-	public static final int MAX_NO_QUANTITY = 20 ;
-	public static final int MIN_NO_QUANTITY = 1 ;
-	
+
+	public static final int MAX_NO_QUANTITY = 20;
+	public static final int MIN_NO_QUANTITY = 1;
+
 	public static final String CURRENCY = "BDT";
 
 	public static String BASE_URL = "http://45.55.196.7:1337";

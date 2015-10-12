@@ -2,9 +2,9 @@ package com.applogic.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-@SuppressWarnings("serial")
 
-public class Food implements Serializable{
+@SuppressWarnings("serial")
+public class Food implements Serializable {
 
 	private String foodName;
 	private String foodPrice;
@@ -13,10 +13,11 @@ public class Food implements Serializable{
 	private String foodTypeName;
 	private String foodIDNo;
 	private int foodType;
+	
 
 	public static final int FOOD_ITEM = 0;
 	public static final int FOOD_SECTION = 1;
-	
+
 	public static int sectionPosition;
 	public static int listPosition;
 

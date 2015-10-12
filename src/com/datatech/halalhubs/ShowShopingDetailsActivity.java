@@ -13,4 +13,12 @@ public class ShowShopingDetailsActivity extends CustomWindow {
 		setContentView(R.layout.activity_shoping_details);
 	}
 
+	@Override
+	protected void onResume() {
+
+		super.onResume();
+		doIncrease();
+
+	}
+
 }

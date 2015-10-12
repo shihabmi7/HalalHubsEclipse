@@ -7,21 +7,21 @@ import org.halfcycle.network.GetFoodListFromAPI;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 import com.applogic.model.Food;
 import com.applogic.utility.ApplicationData;
 import com.applogic.utility.InternetConnection;
+import com.datatech.halalhubstest.R;
 
-public class RestaurentFoodListActivity extends ListActivity {
+public class DemoRestaurentFoodListActivity extends CustomWindow {
 
-	RestaurentFoodListActivity activity = this;
+	DemoRestaurentFoodListActivity activity = this;
 
 	// TODO GET THE LIST FROM HALAL HUBS: finished
 	// TODO SET THE LSIT ITEM LAYOUT & ADAPTER : finished
@@ -29,7 +29,7 @@ public class RestaurentFoodListActivity extends ListActivity {
 
 	PinnedSectionListView list_view_foodList;
 	// ListView list_view_foodList;
-	private FoodListAdapter foodListAdapter;
+	private DemoFoodListAdapter foodListAdapter;
 	ArrayList<Food> foodList = new ArrayList<Food>();
 
 	private boolean isFastScroll = false;
@@ -38,21 +38,13 @@ public class RestaurentFoodListActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.activity_food_list);
+		setContentView(R.layout.demo_activity_food_list);
 
-		// list_view_foodList = (PinnedSectionListView)
-		// findViewById(R.id.list_view_foodList);
+		list_view_foodList = (PinnedSectionListView) findViewById(R.id.list_view_foodList);
+
 		// list_view_foodList = (ListView)
 		// findViewById(R.id.list_view_foodList);
 		// list_view_foodList.setClickable(true);
-
-		// getListView().setFastScrollEnabled(isFastScroll);
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-
-			getListView().setFastScrollAlwaysVisible(true);
-
-		}
 
 		try {
 
@@ -66,46 +58,45 @@ public class RestaurentFoodListActivity extends ListActivity {
 
 			}
 
-			// list_view_foodList
-			// .setOnItemClickListener(new OnItemClickListener() {
-			//
-			// @Override
-			// public void onItemClick(AdapterView<?> arg0, View arg1,
-			// int position, long arg3) {
-			//
-			// // TODO GO TO NEXT PAGE
-			// Food food = foodList.get(position);
-			//
-			//
-			// Toast.makeText(getApplicationContext(),
-			// "Food Item : " + food.getFoodTypeName(),
-			// Toast.LENGTH_LONG).show();
-			//
-			// if (food.getFoodType() == Food.FOOD_ITEM) {
-			// // do your want to do...
-			//
-			// Toast.makeText(getApplicationContext(),
-			// "Food Item : " + food.getFoodName(),
-			// Toast.LENGTH_LONG).show();
-			//
-			// // startActivity(new Intent(activity,
-			// // ShowFoodDetailsActivity.class)
-			// // .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-			// // .putExtra("position", position)
-			// // .putExtra("food", food));
-			//
-			// } else if (food.getFoodType() == Food.FOOD_SECTION) {
-			//
-			// // the Section is on click
-			//
-			// Toast.makeText(getApplicationContext(),
-			// "" + food.getFoodTypeName(),
-			// Toast.LENGTH_LONG).show();
-			//
-			// }
-			//
-			// }
-			// });
+			list_view_foodList
+					.setOnItemClickListener(new OnItemClickListener() {
+
+						@Override
+						public void onItemClick(AdapterView<?> arg0, View arg1,
+								int position, long arg3) {
+
+							// TODO GO TO NEXT PAGE
+							Food food = foodList.get(position);
+
+							Toast.makeText(getApplicationContext(),
+									"Food Item : " + food.getFoodTypeName(),
+									Toast.LENGTH_LONG).show();
+
+							if (food.getFoodType() == Food.FOOD_ITEM) {
+								// do your want to do...
+
+								Toast.makeText(getApplicationContext(),
+										"Food Item : " + food.getFoodName(),
+										Toast.LENGTH_LONG).show();
+
+								// startActivity(new Intent(activity,
+								// ShowFoodDetailsActivity.class)
+								// .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+								// .putExtra("position", position)
+								// .putExtra("food", food));
+
+							} else if (food.getFoodType() == Food.FOOD_SECTION) {
+
+								// the Section is on click
+
+								Toast.makeText(getApplicationContext(),
+										"" + food.getFoodTypeName(),
+										Toast.LENGTH_LONG).show();
+
+							}
+
+						}
+					});
 
 		} catch (RuntimeException e) {
 
@@ -119,21 +110,31 @@ public class RestaurentFoodListActivity extends ListActivity {
 	}
 
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	protected void onResume() {
 
-		Food item = (Food) getListView().getAdapter().getItem(position);
+		super.onResume();
+		doIncrease();
 
-		if (item != null) {
-
-			Toast.makeText(this,
-					"Item " + position + ": " + item.getFoodName(),
-					Toast.LENGTH_SHORT).show();
-		} else {
-
-			Toast.makeText(this, "Item " + position, Toast.LENGTH_SHORT).show();
-
-		}
 	}
+
+	//
+	// @Override
+	// protected void onListItemClick(ListView l, View v, int position, long id)
+	// {
+	//
+	// Food item = (Food) getListView().getAdapter().getItem(position);
+	//
+	// if (item != null) {
+	//
+	// Toast.makeText(this,
+	// "Item " + position + ": " + item.getFoodName(),
+	// Toast.LENGTH_SHORT).show();
+	// } else {
+	//
+	// Toast.makeText(this, "Item " + position, Toast.LENGTH_SHORT).show();
+	//
+	// }
+	// }
 
 	public void getFoodListFromAPI() {
 
@@ -145,11 +146,11 @@ public class RestaurentFoodListActivity extends ListActivity {
 			public void ModificationMade() {
 
 				foodList = ApplicationData.foodList;
-				foodListAdapter = new FoodListAdapter(getApplicationContext(),
-						foodList);
+				foodListAdapter = new DemoFoodListAdapter(
+						getApplicationContext(), foodList);
 
-				// list_view_foodList.setAdapter(foodListAdapter);
-				setListAdapter(foodListAdapter);
+				list_view_foodList.setAdapter(foodListAdapter);
+				// setListAdapter(foodListAdapter);
 
 			}
 		});
@@ -198,5 +199,4 @@ public class RestaurentFoodListActivity extends ListActivity {
 		}
 
 	}
-
 }

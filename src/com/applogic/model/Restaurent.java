@@ -19,6 +19,8 @@ public class Restaurent implements Serializable {
 	private String geoLocation;
 	private String postcode;
 	private String status;
+	
+	private String minimumOrderPrice;
 
 	private ArrayList<FoodMenu> foodMenuList;
 
@@ -254,6 +256,20 @@ public class Restaurent implements Serializable {
 	 */
 	public void setRestaurentID(String restaurentID) {
 		this.restaurentID = restaurentID;
+	}
+
+	/**
+	 * @return the minimumOrderPrice
+	 */
+	public String getMinimumOrderPrice() {
+		return minimumOrderPrice;
+	}
+
+	/**
+	 * @param minimumOrderPrice the minimumOrderPrice to set
+	 */
+	public void setMinimumOrderPrice(String minimumOrderPrice) {
+		this.minimumOrderPrice = minimumOrderPrice;
 	}
 
 }

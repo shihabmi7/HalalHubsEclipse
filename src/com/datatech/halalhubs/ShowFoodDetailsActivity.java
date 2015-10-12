@@ -19,7 +19,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alhikmah.shared.AppPreferenceValues;
 import com.applogic.model.Food;
+import com.applogic.model.Order;
 import com.applogic.utility.ApplicationData;
 import com.applogic.utility.InternetConnection;
 import com.datatech.halalhubstest.R;
@@ -65,11 +67,13 @@ public class ShowFoodDetailsActivity extends CustomWindow implements
 
 		textView_quantity.setText(getString(R.string.quantity) + " " + quatity);
 
-		Food aFood = (Food) getIntent().getSerializableExtra("food");
+		AppPreferenceValues preferenceValues = new AppPreferenceValues(
+				getApplicationContext());
+		// Food aFood = (Food) getIntent().getSerializableExtra("food");
 
-		// String FoodIdNo = aFood.getFoodIDNo();
+		String FoodIdNo = getIntent().getStringExtra("position");
 
-		String FoodIdNo = "2";
+		// String FoodIdNo = "2";
 		url = ApplicationData.SHOW_FOOD_DETAILS + FoodIdNo;
 
 		if (InternetConnection.isAvailable(activity)) {
@@ -297,14 +301,36 @@ public class ShowFoodDetailsActivity extends CustomWindow implements
 
 		} else if (v == btn_add_to_cart) {
 
-			doIncrease();
+			if (food != null) {
 
-			goToShoppingDetails();
+				Order aOrder = new Order();
+				aOrder.setFoodName(food.getFoodName());
+				aOrder.setQuatity(quatity);
+				aOrder.setFoodPrice(food.getFoodPrice());
+
+				ApplicationData.foodOrderList.add(aOrder);
+
+				goToShoppingDetails();
+
+				// finish();
+
+				// TODO SHOW all order to CHECK OUT PAGE
+			}
+
+			// aOrder.
 
 			Toast.makeText(getApplicationContext(), "btn_add_to_cart..",
 					Toast.LENGTH_LONG).show();
 
 		}
+
+	}
+
+	@Override
+	protected void onResume() {
+
+		super.onResume();
+		doIncrease();
 
 	}
 

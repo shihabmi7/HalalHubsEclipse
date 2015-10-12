@@ -3,6 +3,7 @@ package com.datatech.halalhubs;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,7 +22,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
-public class FoodListAdapter extends BaseAdapter implements PinnedSectionListAdapter{
+public class DemoFoodListAdapter extends BaseAdapter implements
+		PinnedSectionListAdapter {
 
 	private final Context mContext;
 	ArrayList<Food> foodList;
@@ -38,7 +40,7 @@ public class FoodListAdapter extends BaseAdapter implements PinnedSectionListAda
 
 	// we use universal image loader library
 
-	public FoodListAdapter(Context context, ArrayList<Food> list) {
+	public DemoFoodListAdapter(Context context, ArrayList<Food> list) {
 
 		mContext = context;
 		this.foodList = list;
@@ -164,6 +166,11 @@ public class FoodListAdapter extends BaseAdapter implements PinnedSectionListAda
 				Toast.makeText(mContext, "Food Item : " + aFood.getFoodName(),
 						Toast.LENGTH_LONG).show();
 
+				
+				mContext.startActivity(new Intent(mContext,
+						ShowFoodDetailsActivity.class)
+						.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+						.putExtra("position", aFood.getFoodIDNo()));
 			}
 		});
 
@@ -177,7 +184,8 @@ public class FoodListAdapter extends BaseAdapter implements PinnedSectionListAda
 
 		case Food.FOOD_ITEM:
 
-			holder.food_name.setText(aFood.getFoodName());
+			holder.food_name.setText(aFood.getFoodName() + "  "
+					+ aFood.getFoodIDNo());
 
 			break;
 
