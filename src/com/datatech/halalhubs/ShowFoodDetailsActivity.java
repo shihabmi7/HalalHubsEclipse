@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -250,6 +249,9 @@ public class ShowFoodDetailsActivity extends CustomWindow implements
 			textView_unit_price.setText(getString(R.string.price_per_unit)
 					+ ": " + food.getFoodPrice());
 
+			txt_view_price_digit.setText(food.getFoodPrice() + "  "
+					+ ApplicationData.CURRENCY);
+
 			Log.e("Food Details Page >> ", "" + food.getFoodName());
 			//
 			// imageLoader.DisplayImage(url_driver, sales_driver_image);
@@ -278,9 +280,12 @@ public class ShowFoodDetailsActivity extends CustomWindow implements
 				textView_quantity.setText(getString(R.string.quantity) + " "
 						+ quatity);
 
+				// ;
 				totalAmount = quatity * Double.parseDouble(food.getFoodPrice());
 
-				txt_view_price_digit.setText(totalAmount + "  "
+				txt_view_price_digit.setText(InternetConnection
+						.stringFormat(totalAmount)
+						+ "  "
 						+ ApplicationData.CURRENCY);
 			}
 
@@ -295,7 +300,9 @@ public class ShowFoodDetailsActivity extends CustomWindow implements
 
 				totalAmount = quatity * Double.parseDouble(food.getFoodPrice());
 
-				txt_view_price_digit.setText(totalAmount + "  "
+				txt_view_price_digit.setText(InternetConnection
+						.stringFormat(totalAmount)
+						+ "  "
 						+ ApplicationData.CURRENCY);
 			}
 
@@ -306,15 +313,13 @@ public class ShowFoodDetailsActivity extends CustomWindow implements
 				Order aOrder = new Order();
 				aOrder.setFoodName(food.getFoodName());
 				aOrder.setQuatity(quatity);
-				aOrder.setFoodPrice(food.getFoodPrice());
-
+				aOrder.setFoodPrice(Double.parseDouble(food.getFoodPrice()));
 				ApplicationData.foodOrderList.add(aOrder);
 
-				goToShoppingDetails();
+				doIncrease();
 
 				// finish();
 
-				// TODO SHOW all order to CHECK OUT PAGE
 			}
 
 			// aOrder.
@@ -331,12 +336,6 @@ public class ShowFoodDetailsActivity extends CustomWindow implements
 
 		super.onResume();
 		doIncrease();
-
-	}
-
-	private void goToShoppingDetails() {
-
-		startActivity(new Intent(this, ShowShopingDetailsActivity.class));
 
 	}
 

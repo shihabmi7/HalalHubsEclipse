@@ -21,7 +21,7 @@ import com.applogic.utility.ApplicationData;
 import com.applogic.utility.InternetConnection;
 import com.datatech.halalhubstest.R;
 
-public class RestaurentListActivity extends Activity {
+public class RestaurentListActivity extends CustomWindow {
 
 	RestaurentListActivity activity = this;
 
@@ -36,6 +36,13 @@ public class RestaurentListActivity extends Activity {
 
 	ArrayList<Restaurent> resList = new ArrayList<Restaurent>();
 
+	@Override
+	protected void onResume() {
+
+		super.onResume();
+		doIncrease();
+
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub

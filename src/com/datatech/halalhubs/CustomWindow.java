@@ -53,12 +53,24 @@ public class CustomWindow extends AppCompatActivity {
 
 		initializeData();
 		iniPopupWindow();
-		// activityAnimator = new ActivityAnimator();
 
 		// set action Bar icon & Text
+		
 		ActionBar mActionBar = getSupportActionBar();
-		mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE
-				| ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+
+		// checking either this is home actiivty or not for
+		// ActionBar.DISPLAY_HOME_AS_UP
+		if (this.getClass().getSimpleName()
+				.equalsIgnoreCase(RestaurentListActivity.class.getSimpleName())) {
+			mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE
+					| ActionBar.DISPLAY_SHOW_CUSTOM
+					| ActionBar.DISPLAY_SHOW_HOME);
+		} else {
+			mActionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP
+					| ActionBar.DISPLAY_SHOW_TITLE
+					| ActionBar.DISPLAY_SHOW_CUSTOM
+					| ActionBar.DISPLAY_SHOW_HOME);
+		}
 
 	}
 
@@ -139,21 +151,50 @@ public class CustomWindow extends AppCompatActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
 
-		if (id == R.id.action_settings) {
+		switch (item.getItemId()) {
 
-			Toast.makeText(getApplicationContext(), "action_settings",
-					Toast.LENGTH_LONG).show();
+		case android.R.id.home:
+
+//			Toast.makeText(getApplicationContext(), "Home Clicked",
+//					Toast.LENGTH_LONG).show();
+
+			// go to previous activity
+			onBackPressed();
+
 			return true;
 
-		} else if (id == R.id.testAction) {
-
-			Toast.makeText(getApplicationContext(), "testAction",
+		case R.id.action_settings:
+			
+			Toast.makeText(getApplicationContext(), "Working...",
 					Toast.LENGTH_LONG).show();
+			
+			return true;
+
+		case R.id.testAction:
+
+			// TODO CHECK WHETHER THE PAGE IS OPEN OR NOT.
+			goToShoppingDetails();
+
+			return true;
+
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void goToShoppingDetails() {
+
+		if (ApplicationData.foodOrderList.size() > 0) {
+
+			startActivity(new Intent(this, ShowShopingDetailsActivity.class));
+
+		} else {
+
+			Toast.makeText(getApplicationContext(), "No Item has been bought",
+					Toast.LENGTH_LONG).show();
+		}
+
 	}
 
 	public void setOrderCount() {

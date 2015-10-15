@@ -166,11 +166,10 @@ public class DemoFoodListAdapter extends BaseAdapter implements
 				Toast.makeText(mContext, "Food Item : " + aFood.getFoodName(),
 						Toast.LENGTH_LONG).show();
 
-				
 				mContext.startActivity(new Intent(mContext,
-						ShowFoodDetailsActivity.class)
-						.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-						.putExtra("position", aFood.getFoodIDNo()));
+						ShowFoodDetailsActivity.class).setFlags(
+						Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("position",
+						aFood.getFoodIDNo()));
 			}
 		});
 
@@ -184,8 +183,8 @@ public class DemoFoodListAdapter extends BaseAdapter implements
 
 		case Food.FOOD_ITEM:
 
-			holder.food_name.setText(aFood.getFoodName() + "  "
-					+ aFood.getFoodIDNo());
+			// show only food name
+			holder.food_name.setText(aFood.getFoodName());
 
 			break;
 

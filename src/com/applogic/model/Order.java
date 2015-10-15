@@ -3,94 +3,138 @@ package com.applogic.model;
 public class Order {
 
 	private String foodName;
-	private String foodPrice;
-	private int quatity;
+	private double foodPrice;
+	private double quantity;
+	private double singleItemTotal;
 	private String deliveryFree;
 	private String salesTax;
 	private String total;
 	private String subTotal;
+
+	public static final int SUBTOTAL = 0;
+	public static final int DELIVERY_FEE = 1;
+	public static final int  SALES_TAX= 2;
+	public static final int TOTAL = 3;
+	
+	
+	
 	/**
 	 * @return the foodName
 	 */
 	public String getFoodName() {
 		return foodName;
 	}
+
 	/**
-	 * @param foodName the foodName to set
+	 * @param foodName
+	 *            the foodName to set
 	 */
 	public void setFoodName(String foodName) {
 		this.foodName = foodName;
 	}
+
 	/**
 	 * @return the foodPrice
 	 */
-	public String getFoodPrice() {
+	public double getFoodPrice() {
 		return foodPrice;
 	}
+
 	/**
-	 * @param foodPrice the foodPrice to set
+	 * @param foodPrice
+	 *            the foodPrice to set
 	 */
-	public void setFoodPrice(String foodPrice) {
+	public void setFoodPrice(double foodPrice) {
 		this.foodPrice = foodPrice;
 	}
+
 	/**
-	 * @return the quatity
+	 * @return the quantity
 	 */
-	public int getQuatity() {
-		return quatity;
+	public double getQuantity() {
+		return quantity;
 	}
+
 	/**
-	 * @param quatity the quatity to set
+	 * @param quantity
+	 *            the quantity to set
 	 */
 	public void setQuatity(int quatity) {
-		this.quatity = quatity;
+		this.quantity = quatity;
 	}
+
 	/**
 	 * @return the deliveryFree
 	 */
 	public String getDeliveryFree() {
 		return deliveryFree;
 	}
+
 	/**
-	 * @param deliveryFree the deliveryFree to set
+	 * @param deliveryFree
+	 *            the deliveryFree to set
 	 */
 	public void setDeliveryFree(String deliveryFree) {
 		this.deliveryFree = deliveryFree;
 	}
+
 	/**
 	 * @return the salesTax
 	 */
 	public String getSalesTax() {
 		return salesTax;
 	}
+
 	/**
-	 * @param salesTax the salesTax to set
+	 * @param salesTax
+	 *            the salesTax to set
 	 */
 	public void setSalesTax(String salesTax) {
 		this.salesTax = salesTax;
 	}
+
 	/**
 	 * @return the total
 	 */
 	public String getTotal() {
 		return total;
 	}
+
 	/**
-	 * @param total the total to set
+	 * @param total
+	 *            the total to set
 	 */
 	public void setTotal(String total) {
 		this.total = total;
 	}
+
 	/**
 	 * @return the subTotal
 	 */
 	public String getSubTotal() {
 		return subTotal;
 	}
+
 	/**
-	 * @param subTotal the subTotal to set
+	 * @param subTotal
+	 *            the subTotal to set
 	 */
 	public void setSubTotal(String subTotal) {
 		this.subTotal = subTotal;
+	}
+
+	/**
+	 * @return the singleItemTotal
+	 */
+	public double getSingleItemTotal() {
+		return singleItemTotal;
+	}
+
+	/**
+	 * @param singleItemTotal
+	 *            the singleItemTotal to set
+	 */
+	public void setSingleItemTotal(double singleItemTotal) {
+		this.singleItemTotal = singleItemTotal;
 	}
 }

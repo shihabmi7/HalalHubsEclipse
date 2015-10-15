@@ -2,7 +2,6 @@ package com.datatech.halalhubs;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -25,7 +24,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
-public class RestaurentViewActivity extends Activity {
+public class RestaurentViewActivity extends CustomWindow {
 
 	RestaurentViewActivity activity = this;
 
@@ -43,7 +42,7 @@ public class RestaurentViewActivity extends Activity {
 	TextView restaurent_name, textView_restaurent_address, restaurent_open,
 			restaurent_close;
 	ImageView imageView_restaurent_pic;
-//	ImageLoader imageLoader = ImageLoader.getInstance();
+	// ImageLoader imageLoader = ImageLoader.getInstance();
 	DisplayImageOptions options;
 	Context context = this;;
 	LinearLayout linear_restaurent_info;
@@ -53,6 +52,13 @@ public class RestaurentViewActivity extends Activity {
 
 	private RatingBar ratingBar_restaurent_view;
 
+	@Override
+	protected void onResume() {
+
+		super.onResume();
+		doIncrease();
+
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO
@@ -70,9 +76,10 @@ public class RestaurentViewActivity extends Activity {
 					.displayer(new RoundedBitmapDisplayer(5))
 					.cacheInMemory(true).build();
 
-//			ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-//					context).diskCacheExtraOptions(480, 480, null).build();
-//			imageLoader.init(config);
+			// ImageLoaderConfiguration config = new
+			// ImageLoaderConfiguration.Builder(
+			// context).diskCacheExtraOptions(480, 480, null).build();
+			// imageLoader.init(config);
 
 			imageView_restaurent_pic = (ImageView) findViewById(R.id.imageView_restaurent_pic);
 			restaurent_name = (TextView) findViewById(R.id.restaurent_name);
@@ -80,19 +87,20 @@ public class RestaurentViewActivity extends Activity {
 			restaurent_open = (TextView) findViewById(R.id.restaurent_open);
 			restaurent_close = (TextView) findViewById(R.id.restaurent_close);
 			button_show_menu = (Button) findViewById(R.id.button_show_menu);
-			relative_restaurent_info = (LinearLayout) findViewById(R.id.relative_restaurent_info);
-			
-			ratingBar_restaurent_view =(RatingBar)findViewById(R.id.ratingBar_restaurent_view);
+			// relative_restaurent_info = (LinearLayout)
+			// findViewById(R.id.relative_restaurent_info);
+
+			ratingBar_restaurent_view = (RatingBar) findViewById(R.id.ratingBar_restaurent_view);
 			ratingBar_restaurent_view.setStepSize((float) 0.25);
 			ratingBar_restaurent_view.setRating(4);
-			
+
 			button_show_menu.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
 
 					startActivity(new Intent(activity,
-							RestaurentFoodListActivity.class));
+							DemoRestaurentFoodListActivity.class));
 
 				}
 			});
@@ -109,26 +117,29 @@ public class RestaurentViewActivity extends Activity {
 					.setText(getString(R.string.restaurent_delivery_close)
 							+ aRestaurent.getClosing_Time());
 
-			ApplicationData.ImageLoaderGetInstance().displayImage(aRestaurent.getImage_Url(),
-					imageView_restaurent_pic, options);
+			ApplicationData.ImageLoaderGetInstance().displayImage(
+					aRestaurent.getImage_Url(), imageView_restaurent_pic,
+					options);
 
-			ApplicationData.ImageLoaderGetInstance().loadImage(aRestaurent.getImage_Url(),
+			ApplicationData.ImageLoaderGetInstance().loadImage(
+					aRestaurent.getImage_Url(),
 					new SimpleImageLoadingListener() {
 						@SuppressWarnings("deprecation")
 						@Override
 						public void onLoadingComplete(String imageUri,
 								View view, Bitmap loadedImage) {
-							
-							
+
 							// Do whatever you want with Bitmap
 							Log.e("loadImage", "onLoadingComplete ");
-							
+
 							// TODO UPDATE CODE HERE SHIHAB
-//							relative_restaurent_info
-//									.setBackground(new BitmapDrawable(
-//											loadedImage));
+							// relative_restaurent_info
+							// .setBackground(new BitmapDrawable(
+							// loadedImage));
 						}
 					});
+
+			imageView_restaurent_pic.bringToFront();
 
 			// imageLoader
 

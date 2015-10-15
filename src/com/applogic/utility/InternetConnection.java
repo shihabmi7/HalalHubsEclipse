@@ -33,5 +33,12 @@ public class InternetConnection {
 		activity.startActivity(startMain);
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
+	
+	
+	public static String stringFormat(Double text) {
+
+		return String.format("%.2f", text);
+
+	}
 
 }

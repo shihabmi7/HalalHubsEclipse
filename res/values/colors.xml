@@ -6,12 +6,38 @@
     <color name="restaurent_view_open_close_bg">#F1F1F2</color>
 
     <!-- progress bar -->
+    
+    
+    
+     <color name="restauent_details_button">#F7931D</color>
+    
+    <color name="food_item_pic_bg">#F1F1F2</color>
+    <color name="food_details_button">#00ADEF</color>
+    
+     <color name="food_details_descrip">#808284</color>
+    
+    
+
+    <color name="show_final_order_line">#00AEEF</color>
+    <color name="show_final_order_button">#F7931D</color>
+    <color name="show_final_order_comment">#EE3E35</color>
+    <color name="show_final_order_headline">#6C6D70</color>
+    
+    
+    <color name="food_list_bg">#F2F3F4</color>
+    <color name="food_list_item_header">#231F20</color>
+    <color name="food_list_item_description">#808284</color>
+    
+    
+<!--     #F2F3F4 -->
+    <!-- // -->
 
     <color name="red_light">#ffff4444</color>
     <color name="green_light">#ff99cc00</color>
     <color name="orange_light">#ffffbb33</color>
     <color name="blue_light">#ff33b5e5</color>
-    
+    <color name="edittext_shopping_details">#B7B9CF</color>
+    <color name="edittext_shopping_details_bg">#EBEEFF</color>
     <color name="default_background_color">@android:color/transparent</color>
     <color name="default_progress_color">#33b5e5</color>
     <color name="default_stroke_color">#33b5e5</color>

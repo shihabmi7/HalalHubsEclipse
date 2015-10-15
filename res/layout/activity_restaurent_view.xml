@@ -7,12 +7,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.datatech.halalhubstest.RestaurentViewActivity" >
+    tools:context="com.datatech.halalhubs.RestaurentViewActivity" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/OrangeRed"
         android:orientation="vertical"
         android:weightSum="1" >
 
@@ -24,32 +23,40 @@
             android:background="@color/white"
             android:orientation="vertical" >
 
-            <LinearLayout
-                android:id="@+id/relative_restaurent_info"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical" >
-            </LinearLayout>
+            <FrameLayout
+                android:id="@+id/framelayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <ImageView
+                    android:id="@+id/frameImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:src="@drawable/demo_pics" />
+
+                <ImageView
+                    android:id="@+id/imageView_restaurent_pic"
+                    android:layout_width="70dp"
+                    android:layout_height="55dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/laziz" />
+            </FrameLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".15"
-            android:background="@color/Orange"
             android:orientation="vertical" >
+
+            <!-- android:background="@color/Orange" -->
 
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" >
-
-                <ImageView
-                    android:id="@+id/imageView_restaurent_pic"
-                    android:layout_width="70dp"
-                    android:layout_height="55dp"
-                    android:layout_marginLeft="10dp"
-                    android:clickable="true"
-                    android:src="@drawable/icon_search" />
 
                 <TextView
                     android:id="@+id/restaurent_name"
@@ -57,7 +64,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="Papus Fish n Chips"
+                    android:text="Laziz"
+                    android:textSize="20dp"
                     android:textColor="@color/list_restaurent_name_text" />
 
                 <TextView
@@ -67,7 +75,9 @@
                     android:layout_alignLeft="@+id/restaurent_name"
                     android:layout_below="@+id/restaurent_name"
                     android:layout_marginTop="10dp"
-                    android:text="Address"
+                    android:singleLine="true"
+                    android:paddingLeft="10dp"
+                    android:text="151 Radford Road, Nottingham, NG7"
                     android:textColor="@color/list_restaurent_name_text" />
             </RelativeLayout>
         </LinearLayout>
@@ -120,8 +130,11 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
+                    android:background="@color/restauent_details_button"
+                    android:padding="10dp"
                     android:text="@string/button_show_menu"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/White" />
             </RelativeLayout>
         </LinearLayout>
 

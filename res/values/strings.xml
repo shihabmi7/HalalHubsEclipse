@@ -8,15 +8,19 @@
     <!-- Restuarant view -->
     <string name="restaurant_delivery_open">Restaurent Open: </string>
     <string name="restaurent_delivery_close">Restaurent Close: </string>
-    <string name="button_show_menu">View Menu</string>
+    <string name="button_show_menu">view menu</string>
     <string name="price_per_unit">Price Per Unit</string>
     <string name="quantity">Quantity</string>
     <string name="total_price">Total Price:</string>
-    <string name="add_to_cart">Add To Cart</string>
+    <string name="add_to_cart">add to cart</string>
     <string name="go_to_checklist">Go to checklist</string>
 
-    <!-- //txt_view_price_digit -->
+    <!-- //Show Shopping Details Form -->
 
+    <string name="subtotal">Sub Total</string>
+    <string name="delivery_fee">Delivery fee</string>
+    <string name="total">Total</string>
+    <string name="sales_tax">Sales tax</string>
 
     <!-- Register Fomr -->
     <string name="register_form_title">Fill up form to Register</string>

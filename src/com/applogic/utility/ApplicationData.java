@@ -23,9 +23,13 @@ public class ApplicationData {
 	public static ImageLoader imageLoader = ImageLoader.getInstance();
 
 	public static String GoogleMapKey = "AIzaSyCN_tzqvvH2YMCVVj3C96vKIVJjysh9CNs";
+	public static String SUB_TOTAL = "AIzaSyCN_tzqvvH2YMCVVj3C96vKIVJjysh9CNs";
+	public static String DELIVERY_FREE = "AIzaSyCN_tzqvvH2YMCVVj3C96vKIVJjysh9CNs";
+	public static String TAX_FEE = "AIzaSyCN_tzqvvH2YMCVVj3C96vKIVJjysh9CNs";
 
 	public static final int MAX_NO_QUANTITY = 20;
 	public static final int MIN_NO_QUANTITY = 1;
+	
 
 	public static final String CURRENCY = "BDT";
 
@@ -44,6 +48,9 @@ public class ApplicationData {
 		return imageLoader;
 
 	}
+	
+	
+
 	// halal hubs
 
 	// show all restaurent

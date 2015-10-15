@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
-    tools:context="com.datatech.halalhubs.ShowFoodDetailsActivity" >
+    tools:context="com.datatech.halalhubs.ShowShopingDetailsActivity" >
 
     <!-- Include Title Bar -->
 
@@ -77,7 +77,7 @@
                     android:layout_gravity="left"
                     android:padding="4dp"
                     android:text="Your Order"
-                    android:textColor="@color/Green"
+                    android:textColor="@color/show_final_order_headline"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -87,8 +87,9 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/SkyBlue"
                 android:orientation="vertical"
-                android:padding="15dp" >
+                android:padding="8dp" >
 
                 <RadioGroup
                     android:id="@+id/radioGroup1"
@@ -118,53 +119,77 @@
                 </RadioGroup>
             </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/dynamic_layout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="4dp" >
+                android:orientation="vertical"
+                android:padding="10dp" >
 
-                <TextView
-                    android:id="@+id/textView_shoping_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center"
-                    android:text="* 2 burger   20 "
-                    android:textColor="@color/Black"
-                    android:textSize="20sp"
-                    android:textStyle="normal" />
-            </RelativeLayout>
+                <!-- <RelativeLayout -->
+                <!-- android:layout_width="match_parent" -->
+                <!-- android:layout_height="wrap_content" > -->
+
+
+                <!-- <TextView -->
+                <!-- android:id="@+id/textView_shoping_item" -->
+                <!-- android:layout_width="wrap_content" -->
+                <!-- android:layout_height="wrap_content" -->
+                <!-- android:layout_alignParentLeft="true" -->
+                <!-- android:padding="10dp" -->
+                <!-- android:text="* 2 burger   20 " -->
+                <!-- android:textColor="@color/Black" -->
+                <!-- android:textSize="20sp" -->
+                <!-- android:textStyle="normal" /> -->
+
+
+                <!-- <TextView -->
+                <!-- android:id="@+id/textView_shoping_price" -->
+                <!-- android:layout_width="wrap_content" -->
+                <!-- android:layout_height="wrap_content" -->
+                <!-- android:layout_alignParentRight="true" -->
+                <!-- android:padding="10dp" -->
+                <!-- android:text="400" -->
+                <!-- android:textColor="@color/Black" -->
+                <!-- android:textSize="20sp" -->
+                <!-- android:textStyle="normal" /> -->
+                <!-- </RelativeLayout> -->
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="4dp"
-                android:background="@color/SkyBlue"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/show_final_order_line"
                 android:orientation="horizontal"
                 android:padding="4dp" >
             </RelativeLayout>
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/dynamic_calculation"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp" >
+                android:orientation="vertical"
+                android:padding="10dp" >
 
-                <TextView
-                    android:id="@+id/txt_view_total_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/total_price"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                <!-- <TextView -->
+                <!-- android:id="@+id/txt_view_total_price" -->
+                <!-- android:layout_width="wrap_content" -->
+                <!-- android:layout_height="wrap_content" -->
+                <!-- android:layout_centerVertical="true" -->
+                <!-- android:text="@string/total_price" -->
+                <!-- android:textColor="@android:color/black" -->
+                <!-- android:textSize="18sp" -->
+                <!-- android:textStyle="bold" /> -->
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="4dp"
-                android:background="@color/SkyBlue"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/show_final_order_line"
                 android:orientation="horizontal"
                 android:padding="4dp" >
             </RelativeLayout>
@@ -173,6 +198,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
                 android:padding="4dp" >
 
                 <TextView
@@ -181,7 +209,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="Comments"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/show_final_order_comment"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -189,11 +217,12 @@
                     android:id="@+id/editText1"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/edittext_shopping_details_bg"
                     android:ems="10"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp" >
-
-                    <requestFocus />
+                    android:padding="8dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/edittext_shopping_details" >
                 </EditText>
             </LinearLayout>
 
@@ -208,7 +237,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:background="@color/green"
+                    android:background="@color/show_final_order_button"
                     android:padding="6dp"
                     android:text="@string/go_to_checklist"
                     android:textColor="@android:color/white"
