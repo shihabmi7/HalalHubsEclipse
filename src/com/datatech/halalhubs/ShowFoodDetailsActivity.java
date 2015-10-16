@@ -1,5 +1,7 @@
 package com.datatech.halalhubs;
 
+import ir.noghteh.JustifiedTextView;
+
 import org.halfcycle.network.HttpRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,6 +10,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Paint.Align;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,8 +34,10 @@ public class ShowFoodDetailsActivity extends CustomWindow implements
 	ImageView food_pic;
 	ShowFoodDetailsActivity activity = this;
 
-	TextView textView_food_name, txt_view_food_description,
+	TextView textView_food_name, 
 			textView_unit_price, textView_quantity, txt_view_price_digit;
+	
+	JustifiedTextView txt_view_food_description;
 
 	public final String TAG = ShowFoodDetailsActivity.class.getCanonicalName();
 
@@ -59,7 +64,7 @@ public class ShowFoodDetailsActivity extends CustomWindow implements
 		btn_add_to_cart.setOnClickListener(this);
 
 		textView_food_name = (TextView) findViewById(R.id.textView_food_name);
-		txt_view_food_description = (TextView) findViewById(R.id.txt_view_food_description);
+		txt_view_food_description = (JustifiedTextView) findViewById(R.id.txt_view_food_description);
 		textView_unit_price = (TextView) findViewById(R.id.textView_unit_price);
 		textView_quantity = (TextView) findViewById(R.id.textView_quantity);
 		txt_view_price_digit = (TextView) findViewById(R.id.txt_view_price_digit);
@@ -242,6 +247,7 @@ public class ShowFoodDetailsActivity extends CustomWindow implements
 
 			textView_food_name.setText(food.getFoodName());
 			txt_view_food_description.setText(food.getFoodDescription());
+			txt_view_food_description.setAlignment(Align.LEFT);
 
 			// ApplicationData.imageLoader.displayImage(ApplicationData.BASE_URL
 			// + food.getFoodPictureUrl(), food_pic);

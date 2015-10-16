@@ -15,72 +15,130 @@
         android:orientation="vertical"
         android:weightSum="1" >
 
-        <LinearLayout
-            android:id="@+id/linear_restaurent_info"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight=".35"
-            android:background="@color/white"
-            android:orientation="vertical" >
+        <!-- <LinearLayout -->
+        <!-- android:id="@+id/linear_restaurent_info" -->
+        <!-- android:layout_width="fill_parent" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_weight=".35" -->
+        <!-- android:background="@color/white" -->
+        <!-- android:orientation="vertical" > -->
 
-            <FrameLayout
-                android:id="@+id/framelayout"
+
+        <!-- <FrameLayout -->
+        <!-- android:id="@+id/framelayout" -->
+        <!-- android:layout_width="match_parent" -->
+        <!-- android:layout_height="match_parent" > -->
+
+
+        <!-- <ImageView -->
+        <!-- android:id="@+id/frameImage" -->
+        <!-- android:layout_width="match_parent" -->
+        <!-- android:layout_height="match_parent" -->
+        <!-- android:layout_gravity="start" -->
+        <!-- android:src="@drawable/demo_pics" /> -->
+
+
+        <!-- <ImageView -->
+        <!-- android:id="@+id/imageView_restaurent_pic" -->
+        <!-- android:layout_width="70dp" -->
+        <!-- android:layout_height="55dp" -->
+        <!-- android:layout_gravity="bottom" -->
+        <!-- android:layout_marginBottom="0dp" -->
+        <!-- android:layout_marginLeft="10dp" -->
+        <!-- android:src="@drawable/laziz" /> -->
+        <!-- </FrameLayout> -->
+        <!-- </LinearLayout> -->
+
+
+        <!-- <LinearLayout -->
+        <!-- android:layout_width="fill_parent" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_weight=".15" -->
+        <!-- android:orientation="vertical" > -->
+
+
+        <!-- android:background="@color/Orange" -->
+
+
+        <!-- <RelativeLayout -->
+        <!-- android:layout_width="fill_parent" -->
+        <!-- android:layout_height="fill_parent" > -->
+
+
+        <!-- <TextView -->
+        <!-- android:id="@+id/restaurent_name" -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_centerHorizontal="true" -->
+        <!-- android:layout_marginTop="10dp" -->
+        <!-- android:text="Laziz" -->
+        <!-- android:textSize="20dp" -->
+        <!-- android:textColor="@color/list_restaurent_name_text" /> -->
+
+
+        <!-- <TextView -->
+        <!-- android:id="@+id/restaurent_address" -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_alignLeft="@+id/restaurent_name" -->
+        <!-- android:layout_below="@+id/restaurent_name" -->
+        <!-- android:layout_marginTop="10dp" -->
+        <!-- android:singleLine="true" -->
+        <!-- android:paddingLeft="10dp" -->
+        <!-- android:text="151 Radford Road, Nottingham, NG7" -->
+        <!-- android:textColor="@color/list_restaurent_name_text" /> -->
+        <!-- </RelativeLayout> -->
+        <!-- </LinearLayout> -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="#FFFFFF" >
+
+            <ImageView
+                android:id="@+id/imgCake"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="200dp"
+                android:src="@drawable/demo_pics" />
 
-                <ImageView
-                    android:id="@+id/frameImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="start"
-                    android:src="@drawable/demo_pics" />
+            <ImageView
+                android:id="@+id/imgLaziz"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="55dp"
+                android:src="@drawable/laziz" />
 
-                <ImageView
-                    android:id="@+id/imageView_restaurent_pic"
-                    android:layout_width="70dp"
-                    android:layout_height="55dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="0dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/laziz" />
-            </FrameLayout>
-        </LinearLayout>
+            <TextView
+                android:id="@+id/restaurent_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgCake"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="52dp"
+                android:layout_toEndOf="@+id/imgLaziz"
+                android:layout_toRightOf="@+id/imgLaziz"
+                android:text="Laziz"
+                android:textColor="#000000"
+                android:textSize="28sp" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight=".15"
-            android:orientation="vertical" >
-
-            <!-- android:background="@color/Orange" -->
-
-            <RelativeLayout
+            <TextView
+                android:id="@+id/restaurent_address"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
-
-                <TextView
-                    android:id="@+id/restaurent_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:text="Laziz"
-                    android:textSize="20dp"
-                    android:textColor="@color/list_restaurent_name_text" />
-
-                <TextView
-                    android:id="@+id/restaurent_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/restaurent_name"
-                    android:layout_below="@+id/restaurent_name"
-                    android:layout_marginTop="10dp"
-                    android:singleLine="true"
-                    android:paddingLeft="10dp"
-                    android:text="151 Radford Road, Nottingham, NG7"
-                    android:textColor="@color/list_restaurent_name_text" />
-            </RelativeLayout>
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/restaurent_name"
+                android:layout_below="@+id/restaurent_name"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="-1"
+                  android:singleLine="true"
+                android:padding="2dp"
+              
+                android:text="151 "
+                android:textColor="#000000"
+                android:textSize="18sp" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"

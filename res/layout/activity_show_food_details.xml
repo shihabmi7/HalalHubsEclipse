@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
- android:background="@color/food_item_pic_bg"
+    android:background="@color/food_item_pic_bg"
     tools:context="com.datatech.halalhubs.ShowFoodDetailsActivity" >
 
     <!-- Include Title Bar -->
@@ -39,8 +39,8 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="@color/food_item_pic_bg"
+                android:orientation="vertical"
                 android:padding="5dp" >
 
                 <!-- <TextView -->
@@ -78,7 +78,7 @@
                     android:text="Food Name"
                     android:textColor="@color/food_list_item_header"
                     android:textSize="20sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
             </RelativeLayout>
 
             <LinearLayout
@@ -96,13 +96,25 @@
                 <!-- android:textSize="18sp" -->
                 <!-- android:textStyle="bold" /> -->
 
-                <TextView
+
+                <!-- <TextView -->
+                <!-- android:id="@+id/txt_view_food_description" -->
+                <!-- android:layout_width="wrap_content" -->
+                <!-- android:layout_height="wrap_content" -->
+                <!-- android:text="Food Description" -->
+                <!-- android:textColor="@color/food_details_descrip" -->
+                <!-- android:textSize="15sp" /> -->
+
+                <ir.noghteh.JustifiedTextView
+                    xmlns:noghteh="http://noghteh.ir"
                     android:id="@+id/txt_view_food_description"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="5dp"
                     android:text="Food Description"
                     android:textColor="@color/food_details_descrip"
-                    android:textSize="15sp" />
+                    noghteh:textSize="20sp" >
+                </ir.noghteh.JustifiedTextView>
             </LinearLayout>
 
             <RelativeLayout
@@ -119,7 +131,7 @@
                     android:layout_centerInParent="true"
                     android:layout_gravity="center"
                     android:text="@string/price_per_unit"
-                 android:textColor="@color/food_list_item_header"
+                    android:textColor="@color/food_list_item_header"
                     android:textSize="20sp"
                     android:textStyle="normal" />
             </RelativeLayout>
@@ -144,7 +156,7 @@
                     android:layout_centerInParent="true"
                     android:layout_gravity="center"
                     android:text="@string/quantity"
-                  android:textColor="@color/food_details_descrip"
+                    android:textColor="@color/food_details_descrip"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -153,17 +165,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                     android:textColor="@color/food_details_descrip"
-                      android:textStyle="bold"
-                        android:textSize="20sp"
-                    android:text=" + " />
+                    android:text=" + "
+                    android:textColor="@color/food_details_descrip"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/app_header_back_ground"
                 android:orientation="horizontal"
-                  android:background="@color/app_header_back_ground"
                 android:padding="5dp" >
 
                 <TextView
@@ -172,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/total_price"
-                  android:textColor="@color/food_list_item_header"
+                    android:textColor="@color/food_list_item_header"
                     android:textSize="18sp"
                     android:textStyle="normal" />
 
@@ -182,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text="0.0"
-                     android:textColor="@color/food_list_item_header"
+                    android:textColor="@color/food_list_item_header"
                     android:textSize="24sp"
                     android:textStyle="bold" />
             </RelativeLayout>
